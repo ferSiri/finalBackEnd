@@ -42,7 +42,7 @@ const Producto = mongoose.model('producto', productSchema);
 Producto.find({}, (error, result) => {
 	if (error) console.log(error);
 	else {
-		if (result.length === 0) {
+		if (result.length > 20) {
 			for (var i = 1; i <= 12; i++) {
 				Producto.create({
 					nombre: faker.commerce.productName(),
@@ -74,7 +74,10 @@ app.get('/verTodo', (req, res) => {
 });
 
 app.get('/discos', (req, res) => {
-	res.render('discos', { losProductos: productos });
+	Producto.find({}, (error, result) => {
+		if (error) console.log(error);
+		else res.render('discos', { losProductos: result });
+	});
 });
 
 app.get('/libros', (req, res) => {

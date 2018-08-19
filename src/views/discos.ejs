@@ -1,57 +1,25 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css"> </head>
+<%- include('partials/head'); %>
 
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button> <a class="navbar-brand" href="/">Webstore</a> </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li class="active"><a href="/discos">Discos</a></li>
-                <li><a href="/libros">Libros</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="navbar-form navbar-left">
-            <div class="form-group"> <input type="text" class="form-control" placeholder="Search"> </div> <button type="submit" class="btn btn-default">Submit</button> </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li class=""><a href="/verTodo">Ver Todo</a></li>
-            <li><a href="/new">Agregar Producto</a></li>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-    </nav>
+    <%- include('partials/navbar'); %>
     <div class="container">
       <div class="row">
-        <% if (products.length > 0) { %>
-          <% for (var i = 0; i < products.length; i++) { %>
-            <% if (products[i].Categorías === 'Disco') { %>
-                <div class="col-md-3">
-                  <div class="thumbnail"> <img src= <%= products[i].Imagen %> alt="" class="img-thumbnail">
-                    <p><b>Nombre: </b> <%= products[i].Nombre  %></p>
-                    <p><b>Categorías: </b><%= products[i].Categorías  %></p>
-                    <p><b>Precio: </b> <%=products[i].Precio %></p>
-                    <p><b>Lugar de venta: </b> <%=products[i].LugarDeVenta %></p>
-                    <a href="<%=`/detalle/${i}`%>">Ver detalle</a>
+        <% if (losProductos.length > 0) { %>
+          <% for (var i = 0; i < losProductos.length; i++) { %>
+            <% if (losProductos[i].categoria === 'Disco') { %>
+              <div class="col-md-3">
+                <div class="card" style="margin-top: 20px; margin-bottom: 20px;">
+                  <img class="card-img-top" src="/assets/images/productos/<%= losProductos[i].pdtoImage %>" alt="thumbnail";>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= losProductos[i].nombre %></h5>
+                    <p class="card-text"><b>$ <%= losProductos[i].precio %></b></p>
+                    <p class="card-text"><%= losProductos[i].desc %></p>
+                    <p class="card-text"><%= losProductos[i].longDesc %></p>
+                    <a href="/product/detail/AA" class="btn btn-info">Detalle</a>
+                    <a href="/product/edit/AA" class="btn btn-warning">Editar</a>
                   </div>
                 </div>
+              </div>
               <% } %>
         <% } %>
         <% } %>
