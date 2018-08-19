@@ -32,6 +32,7 @@ const productSchema = new mongoose.Schema({
 	// slug: { type: String, required: true },
 	nombre: { type: String, required: true },
 	precio: { type: String, required: true },
+	categoria:{ type: String, required: true },
 	desc: { type: String, required: true },
 	longDesc: { type: String, required: true },
 	pdtoImage: { type: String, required: true }
@@ -42,7 +43,7 @@ const Producto = mongoose.model('producto', productSchema);
 Producto.find({}, (error, result) => {
 	if (error) console.log(error);
 	else {
-		if (result.length > 20) {
+		if (result.length === 0) {
 			for (var i = 1; i <= 12; i++) {
 				Producto.create({
 					nombre: faker.commerce.productName(),
@@ -81,7 +82,10 @@ app.get('/discos', (req, res) => {
 });
 
 app.get('/libros', (req, res) => {
-	res.render('libros', { losProductos: productos });
+	Producto.find({}, (error, result) => {
+		if (error) console.log(error);
+		else res.render('libros', { losProductos: result });
+	});
 });
 
 app.get('/new', (req, res) => {
@@ -92,7 +96,10 @@ app.get('/new', (req, res) => {
 });
 
 app.get('/detalle/:pos', (req, res) => {
-	res.render('detalle', { losProductos: productos[req.params.pos] });
+	Producto.find({}, (error, result) => {
+		if (error) console.log(error);
+		else res.render('detalle', { losProductos: result[req.params.pos] });
+	});
 });
 
 app.post('/new', upload.single('pdtoImage'), (req, res) => {

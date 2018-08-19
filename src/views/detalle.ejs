@@ -3,19 +3,22 @@
   <body>
     <%- include('partials/navbar'); %>
     <div class="container">
-      <div class="row">
-        
-            <div class="col-md-12">
-              <div class="thumbnail"> <img src= <%= producto.Imagen %> alt="" class="img-thumbnail">
-                <p><b>Nombre: </b> <%= producto.Nombre  %></p>
-                <p><b>Categorías: </b><%= producto.Categorías  %></p>
-                <p><b>Precio: </b> <%=producto.Precio %></p>
-                <p><b>Lugar de venta: </b> <%=producto.LugarDeVenta %></p>
-              </div>
-            </div>
-        
+			<div class="row" >
+				<div class="col-md-12">
+					<div class="card" style="margin-top: 20px; margin-bottom: 20px;align-content: center; ">
+						<img class="card-img-top" src="/assets/images/productos/<%= losProductos.pdtoImage %>" style="height: 400px;" alt="thumbnail";>
+						<div class="card-body">
+							<h5 class="card-title"><%= losProductos.nombre %></h5>
+							<p class="card-text"><b>$ <%= losProductos.precio %></b></p>
+              <p class="card-text"><%= losProductos.desc %></p>
+              <p class="card-text"><%= losProductos.longDesc %></p>
+              <a href="/verTodo" class="btn btn-info">Volver</a>
+							<a href="/product/edit/AA" class="btn btn-warning">Editar</a>
         </div>
-      </div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="

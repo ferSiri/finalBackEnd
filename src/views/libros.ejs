@@ -4,24 +4,28 @@
     <%- include('partials/navbar'); %>
     <div class="container">
       <div class="row">
-        <% if (products.length > 0) { %>
-          <% for (var i = 0; i < products.length; i++) { %>
-            <% if (products[i].Categorías === 'Libro') { %>
-                <div class="col-md-3">
-                  <div class="thumbnail"> <img src= <%= products[i].Imagen %> alt="" class="img-thumbnail">
-                    <p><b>Nombre: </b> <%= products[i].Nombre  %></p>
-                    <p><b>Categorías: </b><%= products[i].Categorías  %></p>
-                    <p><b>Precio: </b> <%=products[i].Precio %></p>
-                    <p><b>Lugar de venta: </b> <%=products[i].LugarDeVenta %></p>
-                    <a href="<%=`/detalle/${i}`%>">Ver detalle</a>
+        <% if (losProductos.length > 0) { %>
+          <% for (var i = 0; i < losProductos.length; i++) { %>
+            <% if (losProductos[i].categoria === 'Libro') { %>
+              <div class="col-md-3">
+                <div class="card" style="margin-top: 20px; margin-bottom: 20px;">
+                  <img class="card-img-top" src="/assets/images/productos/<%= losProductos[i].pdtoImage %>" alt="thumbnail";>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= losProductos[i].nombre %></h5>
+                    <p class="card-text"><b>$ <%= losProductos[i].precio %></b></p>
+                    <p class="card-text"><%= losProductos[i].desc %></p>
+                    <p class="card-text"><%= losProductos[i].longDesc %></p>
+                    <a href="/product/detail/AA" class="btn btn-info">Detalle</a>
+                    <a href="/product/edit/AA" class="btn btn-warning">Editar</a>
                   </div>
                 </div>
+              </div>
               <% } %>
         <% } %>
         <% } %>
         
       </div>
-    </div>
+      </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
         crossorigin="anonymous"></script>
