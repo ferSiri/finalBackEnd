@@ -32,7 +32,7 @@ const productSchema = new mongoose.Schema({
 	// slug: { type: String, required: true },
 	nombre: { type: String, required: true },
 	precio: { type: String, required: true },
-	categoria:{ type: String, required: true },
+	categoria: { type: String, required: true },
 	desc: { type: String, required: true },
 	longDesc: { type: String, required: true },
 	pdtoImage: { type: String, required: true }
@@ -43,7 +43,7 @@ const Producto = mongoose.model('producto', productSchema);
 Producto.find({}, (error, result) => {
 	if (error) console.log(error);
 	else {
-		if (result.length === 0) {
+		if (result.length === 31) {
 			for (var i = 1; i <= 12; i++) {
 				Producto.create({
 					nombre: faker.commerce.productName(),
@@ -107,6 +107,7 @@ app.post('/new', upload.single('pdtoImage'), (req, res) => {
 	Producto.create({
 		nombre: req.body.nombre,
 		precio: req.body.precio,
+		categoria: req.body.categoria,
 		desc: req.body.desc,
 		longDesc: req.body.longDesc,
 		pdtoImage: req.file.filename

@@ -4,14 +4,15 @@
     <%- include('partials/navbar'); %>
     <div class="container">
 			<div class="row" >
-				<div class="col-md-12">
+				<div class="col-md-12" style="text-align: center;">
 					<div class="card" style="margin-top: 20px; margin-bottom: 20px;align-content: center; ">
 						<img class="card-img-top" src="/assets/images/productos/<%= losProductos.pdtoImage %>" style="height: 400px;" alt="thumbnail";>
-						<div class="card-body">
-							<h5 class="card-title"><%= losProductos.nombre %></h5>
-							<p class="card-text"><b>$ <%= losProductos.precio %></b></p>
-              <p class="card-text"><%= losProductos.desc %></p>
-              <p class="card-text"><%= losProductos.longDesc %></p>
+						<div class="card-body" >
+                <h5 class="card-title"><strong>Nombre: </strong><%= losProductos.nombre %></h5>
+                <p class="card-text"><strong>Precio: </strong>$ <%= losProductos.precio %></p>
+                <p class="card-text"><strong>Categoría: </strong><%= losProductos.categoria %></p>
+                <p class="card-text"><strong>Decripción: </strong><%= losProductos.desc %></p>
+                <p class="card-text"><strong>Decripción larga: </strong><%= losProductos.longDesc %></p>
               <a href="/verTodo" class="btn btn-info">Volver</a>
 							<a href="/product/edit/AA" class="btn btn-warning">Editar</a>
         </div>

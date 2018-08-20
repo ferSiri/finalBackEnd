@@ -6,7 +6,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
-    </button> <a class="navbar-brand" href="/">My Store</a> </div>
+    </button> <a class="navbar-brand" href="/" style="font-size: 200%; margin-top: -10px; font-weight: bolder; color: orangered;"> <span class="glyphicon glyphicon-gift"></span> My Store</a> </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
@@ -20,8 +20,8 @@
         <form class="navbar-form navbar-left">
           <div class="form-group"> <input type="text" class="form-control" placeholder="Search"> </div> <button type="submit" class="btn btn-default">Submit</button> </form>
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="/verTodo">Ver Todo</a></li>
-          <li><a href="/new">Agregar Producto</a></li>
+          <li class="<%= isActive == 'Home' ? 'active' : '' %>"><a href="/verTodo">Ver Todo</a></li>
+          <li class="<%= isActive == 'New' ? 'active' : '' %>"><a href="/new">Agregar Producto</a></li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->

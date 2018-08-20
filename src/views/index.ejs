@@ -1,11 +1,11 @@
-<%- include('partials/head'); %>
+<%- include('partials/head', {title: 'Home'}); %>
 
   <body>
-    <%- include('partials/navbar'); %>
-    <div class="container">
+    <%- include('partials/navbar', {isActive: ''}); %>
+    <div class="container" style="text-align: center;">
       <div class="jumbotron">
         <h1>Gran Catalogo de Productos</h1>
-        <p> Todo lo que buscas esta acá </p> <a class="btn btn-primary btn-lg" href="/verTodo">Miralo</a> </div>
+        <p> Todo lo que buscas esta acá </p> <a class="btn btn-warning btn-lg" href="/verTodo">Ingresar</a> </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
