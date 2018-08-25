@@ -2,20 +2,75 @@
 
   <body>
     <%- include('partials/navbar', {isActive: 'New'}); %>
+    <% if (typeof errors != 'undefined') { %>
+      <p class="alert alert-danger">	<%= errors %> </p>
+    <% } %>
     <div class="container">
-      <form action="/new" method="post" enctype="multipart/form-data">
-        <div class="form-group"><label for="">Nombre</label><input type="text" class="form-control" name="nombre"></div>
-        <div class="form-group"><label for="">Categoria</label><input type="text" class="form-control" name="categoria"></div>
-        <div class="form-group"><label for="">Precio</label><input type="text" class="form-control" name="precio"></div>
-        <div class="form-group"><label for="">Descripción</label><input type="text" class="form-control" name="desc"></div>
-        <div class="form-group"><label for="">Descripción detallada</label><input type="text" class="form-control" name="longDesc"></div>
-        <label>Imagen</label><input type="file" name="pdtoImage" class="form-control"><br>
+      <form id="formCreate" action="/new" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="">Nombre</label>
+          <input type="text" class="form-control" name="nombre">
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="">Categoria</label>
+          <input type="text" class="form-control" name="categoria">
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="">Precio</label>
+          <input type="text" class="form-control" name="precio">
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="">Descripción</label>
+          <input type="text" class="form-control" name="desc">
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="">Descripción detallada</label>
+          <input type="text" class="form-control" name="longDesc">
+          <div class="invalid-feedback"></div>
+        </div>
+        <label>Imagen</label>
+        <input type="file" name="pdtoImage" class="form-control"><br>
         <div style="display: block; text-align: center;"><button class="btn btn-warning btn-lg" type="submit">Agregar</button> </div>
       </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
         crossorigin="anonymous"></script>
+    <script>
+      
+      let theForm = document.querySelector('#formCreate');
+      let theElements = Array.from(theForm.elements);
+            theElements.pop();
+            // let laImagen = document.querySelector('[type="file"]').files.length;
+            // if (!laImagen.length) {
+            // 	window.alert('Subí una imagen');
+            // }
+            // console.log(laImagen);
+            theElements.forEach(oneElement => {
+              oneElement.onblur = function () {
+                if (this.value === '') {
+                  this.classList.add('errorr');
+                  this.parentElement.querySelector('.invalid-feedback').innerText = 'Campo obligatorio';
+                } else {
+                  this.classList.remove('errorr');
+                  this.parentElement.querySelector('.invalid-feedback').innerText = '';
+                }
+              };
+            });
+            theForm.onsubmit = function (e) {
+              if (theElements[0].value === '' || theElements[1].value === '' || theElements[2].value === '' || theElements[4].value === '') {
+                e.preventDefault();
+                theElements.forEach(function (oneElement) {
+                  oneElement.classList.add('errorr');
+                  oneElement.parentElement.querySelector('.invalid-feedback').innerText = 'Campo obligatorio';
+                });
+              }
+            };
+    </script>    
   </body>
 
 </html>

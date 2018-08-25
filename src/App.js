@@ -29,7 +29,7 @@ app.set('views', './src/views/');
 mongoose.connect('mongodb://localhost/dbTienda');
 
 const productSchema = new mongoose.Schema({
-	// slug: { type: String, required: true },
+	slug: { type: String, required: true },
 	nombre: { type: String, required: true },
 	precio: { type: String, required: true },
 	categoria: { type: String, required: true },
@@ -43,10 +43,13 @@ const Producto = mongoose.model('producto', productSchema);
 Producto.find({}, (error, result) => {
 	if (error) console.log(error);
 	else {
-		if (result.length === 31) {
+		if (result.length ===0) {
 			for (var i = 1; i <= 12; i++) {
-				Producto.create({
-					nombre: faker.commerce.productName(),
+				let pdtoName = faker.commerce.productName();
+				let slugText = pdtoName.replace(/ /g, '-').toLowerCase();
+				Product.create({
+					slug: slugText,
+					pdtoName: pdtoName,
 					precio: faker.commerce.price(),
 					desc: faker.lorem.sentence(),
 					longDesc: faker.lorem.sentences(),
@@ -94,19 +97,30 @@ app.get('/new', (req, res) => {
 		else res.render('new', { losProductos: result });
 	});
 });
-
-app.get('/detalle/:pos', (req, res) => {
-	Producto.find({}, (error, result) => {
-		if (error) console.log(error);
-		else res.render('detalle', { losProductos: result[req.params.pos] });
+//cambiar find por findOne en detallebvbglg
+app.get('/detalle/:slug', (req, res) => {
+	Producto.findOne({slug:req.params.slug, _id:req.query.id}, (error, result) => {
+		if (error) console.log(' Consulta:',error);
+		else res.render('detalle', { losProductos: result });
 	});
 });
 
 app.post('/new', upload.single('pdtoImage'), (req, res) => {
 	//  res.send({ body: req.body, file: req.file });
+	let slug = req.body.nombre.trim().replace(/ /g, '-').toLowerCase();
+	let pdtoName = req.body.nombre.trim();
+	let pdtoPrice = req.body.precio.trim();
+	let pdtoCat= req.body.categoria.trim();
+	let pdtoDesc= req.body.desc.trim();
+	let pdtoLongDesc= req.body.longDesc.trim();
+
+	if (pdtoName === '' || pdtoPrice === ''|| pdtoCat === ''|| pdtoDesc === ''|| pdtoLongDesc === '') {
+		res.render('new', { errors: 'Todos los campos son obligatorios' });
+	} else {
 	Producto.create({
-		nombre: req.body.nombre,
-		precio: req.body.precio,
+		slug:slug,
+		nombre: pdtoName,
+		precio: pdtoPrice,
 		categoria: req.body.categoria,
 		desc: req.body.desc,
 		longDesc: req.body.longDesc,
@@ -115,8 +129,8 @@ app.post('/new', upload.single('pdtoImage'), (req, res) => {
 		if (error) console.error(error);
 		else res.redirect('/');
 	});
-});
+}});
 
 app.use((req, res, next)=>{
-	res.status(404).send('not Found 404');
+	res.status(404).render('404');
 });

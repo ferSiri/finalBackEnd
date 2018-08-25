@@ -4,22 +4,22 @@
     <%- include('partials/navbar', {isActive: 'Home'}); %>
     <div class="container">
 			<div class="row" >
-				<% for(var i = 0; i < losProductos.length; i++) { %>
+				<% losProductos.forEach(function (pro) { %>
 				<div class="col-md-4">
 					<div class="card" style="margin-top: 20px; margin-bottom: 20px; text-align: center;">
-						<img class="card-img-top" src="/assets/images/productos/<%= losProductos[i].pdtoImage %>" alt="thumbnail";>
+						<img class="card-img-top" src="/assets/images/productos/<%= pro.pdtoImage %>" alt="thumbnail";>
 						<div class="card-body">
-							<h5 class="card-title"><strong>Nombre: </strong><%= losProductos[i].nombre %></h5>
-							<p class="card-text"><strong>Precio: </strong>$ <%= losProductos[i].precio %></p>
-							<p class="card-text"><strong>Categoría: </strong> <%= losProductos[i].categoria %></p>
-              <p class="card-text"><strong>Decripción: </strong><%= losProductos[i].desc %></p>
-              <p class="card-text"><strong>Decripción larga: </strong><%= losProductos[i].longDesc %></p>
-							<a href="/detalle/<%= i %>" class="btn btn-info">Detalle</a>
+							<h5 class="card-title"><strong>Nombre: </strong><%= pro.nombre %></h5>
+							<p class="card-text"><strong>Precio: </strong>$ <%= pro.precio %></p>
+							<p class="card-text"><strong>Categoría: </strong> <%= pro.categoria %></p>
+              <p class="card-text"><strong>Decripción: </strong><%= pro.desc %></p>
+              <p class="card-text"><strong>Decripción larga: </strong><%= pro.longDesc %></p>
+							<a href="/detalle/<%= pro.slug %>?id=<%= pro._id %>" class="btn btn-info">Detalle</a>
 							<a href="/product/edit/AA" class="btn btn-warning">Editar</a>
 						</div>
 					</div>
 				</div>
-				<% } %>
+				<% }) %>
 			</div>
 		</div>
     </div>
