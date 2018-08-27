@@ -12,9 +12,10 @@ const storage = multer.diskStorage({
 		cb(null, './public/images/productos/');
 	},
 	filename: function (req, file, cb) {
-		let imgName = req.body.nombre.replace(/ /g, '-').toLowerCase();
+		let imgName = req.body.nombre.trim().replace(/ /g, '-').toLowerCase();
+		let imgFinalName = imgName + '-' + Date.now();
 		let ext = file.originalname.substr(file.originalname.length - 4);
-		cb(null, imgName + ext);
+		cb(null, imgFinalName + ext);
 	}
 });
 
@@ -130,6 +131,13 @@ app.post('/new', upload.single('pdtoImage'), (req, res) => {
 		else res.redirect('/');
 	});
 }});
+
+app.post('/delete/:id', (req, res) => {
+	Producto.deleteOne({ _id: req.params.id }, (error, result) => {
+		if (error) console.log(error);
+		else res.redirect('/');
+	});
+});
 
 app.use((req, res, next)=>{
 	res.status(404).render('404');

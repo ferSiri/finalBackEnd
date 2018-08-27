@@ -51,7 +51,10 @@
                 <p class="card-text"><strong>Decripción: </strong><%= losProductos.desc %></p>
                 <p class="card-text"><strong>Decripción larga: </strong><%= losProductos.longDesc %></p>
               <a href="/verTodo" class="btn btn-info">Volver</a>
-							<a href="/product/edit/AA" class="btn btn-warning">Editar</a>
+              <form action="/delete/<%= losProductos._id %>" method="post">
+                <a href="/new" class="btn btn-warning">Editar</a>
+                <button class="btn btn-danger" type="submit">Eliminar</button>
+              </form>
         </div>
 					</div>
 				</div>
